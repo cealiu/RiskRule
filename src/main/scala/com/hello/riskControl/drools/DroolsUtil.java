@@ -17,6 +17,7 @@ import org.kie.api.runtime.rule.FactHandle;
 
 import org.drools.core.impl.InternalKnowledgeBase;
 import org.drools.core.impl.KnowledgeBaseFactory;
+import org.drools.core.impl.KnowledgeBaseFactoryServiceImpl;
 
 
 import org.kie.internal.builder.KnowledgeBuilder;

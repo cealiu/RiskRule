@@ -20,7 +20,7 @@
         <spark.kafka.version>2.2.1</spark.kafka.version>
         <kafka.version>0.10.0.1</kafka.version>
         <elasticsearch.version>5.6.3</elasticsearch.version>
-        <drools.version>7.9.0.Final</drools.version>
+        <drools.version>7.0.0.Final</drools.version>
         <encoding>UTF-8</encoding>
     </properties>
 
