@@ -10,7 +10,7 @@ object PropertiesLoad {
 
   def loadFilePath(): Unit = {
     try {
-      properties.load(PropertiesLoad.getClass.getClassLoader.getResourceAsStream("hellobike.properties"))
+      properties.load(PropertiesLoad.getClass.getClassLoader.getResourceAsStream("hello.properties"))
     } catch {
       case ex: FileNotFoundException => ex.printStackTrace()
       case ex: IOException => ex.printStackTrace()

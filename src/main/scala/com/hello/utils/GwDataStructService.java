@@ -1,6 +1,5 @@
 package com.hello.utils;
 
-//import com.hellobike.riskControl.util.RedisUtil;
 import com.hello.riskControl.util.JedisPoolUtil;
 
 import java.text.ParseException;

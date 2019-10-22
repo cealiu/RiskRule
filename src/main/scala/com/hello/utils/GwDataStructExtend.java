@@ -1,6 +1,7 @@
 package com.hello.utils;
 
 public class GwDataStructExtend extends GwDataStruct {
+    //可以使用key hash分区到partition
 
     private Long startTime;
 
