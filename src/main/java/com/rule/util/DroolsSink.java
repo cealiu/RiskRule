@@ -7,6 +7,6 @@ public class DroolsSink extends RichSinkFunction {
 
 	@Override
 	public void invoke(Object value, Context context) throws Exception {
-		
+
 	}
 }
