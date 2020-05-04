@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: com.hello.riskControl.RiskRule
+Main-Class: com.rule.RiskRule
 

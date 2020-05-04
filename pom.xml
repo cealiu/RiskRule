@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <properties>
         <spark.version>2.2.1</spark.version>
-        <scala.version>2.11</scala.version>
+        <scala.binary.version>2.11</scala.binary.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -21,23 +21,24 @@
         <kafka.version>0.10.0.1</kafka.version>
         <elasticsearch.version>5.6.3</elasticsearch.version>
         <drools.version>7.0.0.Final</drools.version>
+        <flink.version>1.10.0</flink.version>
         <encoding>UTF-8</encoding>
     </properties>
 
-    <repositories>
-        <repository>
-            <id>scala-tools.org</id>
-            <name>Scala-Tools Maven2 Repository</name>
-            <url>http://scala-tools.org/repo-releases</url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>scala-tools.org</id>
-            <name>Scala-Tools Maven2 Repository</name>
-            <url>http://scala-tools.org/repo-releases</url>
-        </pluginRepository>
-    </pluginRepositories>
+<!--    <repositories>-->
+<!--        <repository>-->
+<!--            <id>scala-tools.org</id>-->
+<!--            <name>Scala-Tools Maven2 Repository</name>-->
+<!--            <url>http://scala-tools.org/repo-releases</url>-->
+<!--        </repository>-->
+<!--    </repositories>-->
+<!--    <pluginRepositories>-->
+<!--        <pluginRepository>-->
+<!--            <id>scala-tools.org</id>-->
+<!--            <name>Scala-Tools Maven2 Repository</name>-->
+<!--            <url>http://scala-tools.org/repo-releases</url>-->
+<!--        </pluginRepository>-->
+<!--    </pluginRepositories>-->
      <dependencies>
 
          <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
@@ -136,13 +137,13 @@
          </dependency>
          <dependency>
              <groupId>org.apache.spark</groupId>
-             <artifactId>spark-core_${scala.version}</artifactId>
+             <artifactId>spark-core_${scala.binary.version}</artifactId>
              <version>${spark.version}</version>
              <scope>provided</scope>
          </dependency>
          <dependency>
              <groupId>org.apache.spark</groupId>
-             <artifactId>spark-sql_${scala.version}</artifactId>
+             <artifactId>spark-sql_${scala.binary.version}</artifactId>
              <version>${spark.version}</version>
              <scope>provided</scope>
          </dependency>
@@ -192,33 +193,26 @@
              <artifactId>kafka-clients</artifactId>
              <version>0.10.0.1</version>
          </dependency>
+
+
+         <!-- flink -->
+         <dependency>
+             <groupId>org.apache.flink</groupId>
+             <artifactId>flink-java</artifactId>
+             <version>${flink.version}</version>
+             <scope>provided</scope>
+         </dependency>
+         <dependency>
+             <groupId>org.apache.flink</groupId>
+             <artifactId>flink-streaming-java_${scala.binary.version}</artifactId>
+             <version>${flink.version}</version>
+             <scope>provided</scope>
+         </dependency>
+         <dependency>
+             <groupId>org.apache.flink</groupId>
+             <artifactId>flink-connector-kafka_2.11</artifactId>
+             <version>1.10.0</version>
+         </dependency>
      </dependencies>
 
-    <!--<build>-->
-        <!--<plugins>-->
-            <!--<plugin>-->
-                <!--<artifactId>maven-assembly-plugin</artifactId>-->
-                <!--<version>2.4</version>-->
-                <!--<configuration>-->
-                    <!--<descriptorRefs>-->
-                        <!--<descriptorRef>jar-with-dependencies</descriptorRef>-->
-                    <!--</descriptorRefs>-->
-                    <!--<archive>-->
-                        <!--<manifest>-->
-                            <!--<mainClass>com.hello.MetricsBike</mainClass>-->
-                        <!--</manifest>-->
-                    <!--</archive>-->
-                <!--</configuration>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>make-assembly</id>-->
-                        <!--<phase>package</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>single</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
-        <!--</plugins>-->
-    <!--</build>-->
 </project>
