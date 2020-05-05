@@ -2,12 +2,12 @@ package com.rule.constant;
 
 public class Constants {
 
-	public static String POSTGREURL = "";
+	public static String MYSQLURL = "jdbc:mysql://localhost:3306/rule";
 
-	public static String POSTGREUSER = "";
+	public static String MYSQLUSER = "root";
 
-	public static String POSTGREPASSWORD = "";
+	public static String MYSQLPASSWORD = "123456";
 
-	public static String POSTGRESQL = "";
+	public static String SQL = "select rule_name, rule_content from rule_details;";
 
 }

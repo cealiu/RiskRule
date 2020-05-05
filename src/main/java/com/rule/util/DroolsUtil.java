@@ -80,14 +80,14 @@ public class DroolsUtil {
 	}
 
 	public static Map getNewRule() throws ClassNotFoundException, SQLException, UnsupportedEncodingException{
-		Class.forName("org.postgresql.Driver");
-		Connection connection= DriverManager.getConnection(Constants.POSTGREURL,Constants.POSTGREUSER, Constants.POSTGREPASSWORD);
-		String sql = Constants.POSTGRESQL;
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection connection= DriverManager.getConnection(Constants.MYSQLURL,Constants.MYSQLUSER, Constants.MYSQLPASSWORD);
+		String sql = Constants.SQL;
 		Statement statement = connection.createStatement();
 		ResultSet resultSet = statement.executeQuery(sql);
 		Map rule = new HashMap();
 		while (resultSet.next()) {
-			rule.put( resultSet.getString("rulename"), resultSet.getString("rulecontent"));
+			rule.put( resultSet.getString("rule_name"), resultSet.getString("rule_content"));
 		}
 		statement.close();
 		connection.close();
@@ -99,7 +99,5 @@ public class DroolsUtil {
 		kieSessions.fireAllRules();
 		kieSessions.delete(ss);
 	}
-
-
 }
 
