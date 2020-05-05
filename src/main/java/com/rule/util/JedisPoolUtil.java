@@ -29,7 +29,7 @@ public class JedisPoolUtil {
                     // 在borrow一个jedis实例时，是否提前进行validate操作；如果为true，则得到的jedis实例均是可用的；
                     poolConfig.setTestOnBorrow(true);
 
-                    jedisPool = new JedisPool(poolConfig, "127.0.0.1",6379);
+                    jedisPool = new JedisPool(poolConfig, "192.168.2.120",6379);
                 }
             }
         }

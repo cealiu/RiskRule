@@ -2,7 +2,7 @@ package com.rule.constant;
 
 public class Constants {
 
-	public static String MYSQLURL = "jdbc:mysql://localhost:3306/rule";
+	public static String MYSQLURL = "jdbc:mysql://192.168.2.120:3306/rule?characterEncoding=utf8";
 
 	public static String MYSQLUSER = "root";
 

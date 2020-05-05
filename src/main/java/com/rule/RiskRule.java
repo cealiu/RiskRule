@@ -21,14 +21,19 @@ public class RiskRule {
 		Properties properties = new Properties();
 		properties.setProperty("bootstrap.servers", "localhost:9092");
 
-		FlinkKafkaConsumer<String> consumer = new FlinkKafkaConsumer<>("test", new SimpleStringSchema(), properties);
+		FlinkKafkaConsumer<String> consumer = new FlinkKafkaConsumer<>("user", new SimpleStringSchema(), properties);
 		//从最早开始消费
 		consumer.setStartFromEarliest();
 		SingleOutputStreamOperator<RuleObject> ruleObject = env.addSource(consumer).setParallelism(1)
 				.map(string -> JSON.parseObject(string, RuleObject.class));
 		Jedis jedis = JedisPoolUtil.getJedisPoolInstance().getResource();
-		if(Boolean.parseBoolean(jedis.get("isUpdateRule"))){
+		jedis.select(0);
+		String isUpdateRule = jedis.get("isUpdateRule");
+		if(null!=isUpdateRule&&Boolean.parseBoolean(isUpdateRule)){
 			DroolsUtil.updateRule();
+			jedis.set("isUpdateRule","false");
+			JedisPoolUtil.returnResource(jedis);
+			System.out.println("更改成功!");
 		}
 
 		ruleObject.addSink(new DroolsSink());

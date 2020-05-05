@@ -36,8 +36,9 @@ public class DroolsUtil {
 
 		KieServices kieServices = KieServices.Factory.get();
 		KieFileSystem kfs = kieServices.newKieFileSystem();
+
 		for (Map.Entry<String, String> entry : newRule.entrySet()) {
-			kfs.write("src/main/resources/rules/"+entry.getKey()+".drl", entry.getValue().getBytes());
+			kfs.write("src/main/resources/rules/" + entry.getKey() + ".drl", entry.getValue().getBytes());
 		}
 		KieBuilder kieBuilder = kieServices.newKieBuilder(kfs).buildAll();
 		Results results = kieBuilder.getResults();
@@ -46,6 +47,7 @@ public class DroolsUtil {
 			System.out.println("-----------语法解析报错，drools规则更新无效------------------");
 			return false;
 		}
+
 		kieContainer = kieServices.newKieContainer(kieServices.getRepository().getDefaultReleaseId());
 
 		KieBaseConfiguration kieBaseConf = kieServices.newKieBaseConfiguration();
@@ -57,12 +59,10 @@ public class DroolsUtil {
 //            KieSessionConfiguration kieSessionConfiguration = kieServices.newKieSessionConfiguration();
 //            kieSessionConfiguration.setOption();
 		kieSessions = kieBase.newKieSession();
-		RULE = newRule;
+
 		return true;
 
 	}
-
-	public static Map RULE = new HashMap();
 
 	public static void updateRule(){
 		try {
@@ -94,8 +94,17 @@ public class DroolsUtil {
 		return rule;
 	}
 
-	public static void execRule(RuleObject ruleObject){
-		FactHandle ss = kieSessions.insert(ruleObject);
+	public static KieSession getKieSessions() throws Exception{
+		if (kieSessions == null){
+			initKieSession(getNewRule());
+			return kieSessions;
+		}else {
+			return kieSessions;
+		}
+	}
+
+	public static void execRule(RuleObject ruleObject)throws Exception{
+		FactHandle ss = getKieSessions().insert(ruleObject);
 		kieSessions.fireAllRules();
 		kieSessions.delete(ss);
 	}
