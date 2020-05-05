@@ -15,6 +15,8 @@ import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.rule.FactHandle;
 import org.kie.internal.conf.MaxThreadsOption;
 import org.kie.internal.conf.MultithreadEvaluationOption;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.*;
@@ -99,6 +101,23 @@ public class DroolsUtil {
 			initKieSession(getNewRule());
 			return kieSessions;
 		}else {
+			Jedis jedis = JedisPoolUtil.getJedisPoolInstance().getResource();
+			jedis.select(0);
+			try {
+				String isUpdateRule = jedis.get("isUpdateRule");
+				if(null!=isUpdateRule&&Boolean.parseBoolean(isUpdateRule)){
+					DroolsUtil.updateRule();
+					jedis.set("isUpdateRule","false");
+//					JedisPoolUtil.returnResource(jedis);
+					System.out.println("更改成功!");
+				}
+			}catch (Exception e){
+				e.printStackTrace();
+			}finally {
+				JedisPoolUtil.returnResource(jedis);
+			}
+
+
 			return kieSessions;
 		}
 	}

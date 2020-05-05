@@ -26,15 +26,15 @@ public class RiskRule {
 		consumer.setStartFromEarliest();
 		SingleOutputStreamOperator<RuleObject> ruleObject = env.addSource(consumer).setParallelism(1)
 				.map(string -> JSON.parseObject(string, RuleObject.class));
-		Jedis jedis = JedisPoolUtil.getJedisPoolInstance().getResource();
-		jedis.select(0);
-		String isUpdateRule = jedis.get("isUpdateRule");
-		if(null!=isUpdateRule&&Boolean.parseBoolean(isUpdateRule)){
-			DroolsUtil.updateRule();
-			jedis.set("isUpdateRule","false");
-			JedisPoolUtil.returnResource(jedis);
-			System.out.println("更改成功!");
-		}
+//		Jedis jedis = JedisPoolUtil.getJedisPoolInstance().getResource();
+//		jedis.select(0);
+//		String isUpdateRule = jedis.get("isUpdateRule");
+//		if(null!=isUpdateRule&&Boolean.parseBoolean(isUpdateRule)){
+//			DroolsUtil.updateRule();
+//			jedis.set("isUpdateRule","false");
+//			JedisPoolUtil.returnResource(jedis);
+//			System.out.println("更改成功!");
+//		}
 
 		ruleObject.addSink(new DroolsSink());
 		env.execute();
