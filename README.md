@@ -6,3 +6,4 @@
 todo: 架构改变watch zookeeper/get status from redis，规则自动更新
 
 [web端后台地址](https://github.com/cealiu/rule-system)
+[web前端控台](https://github.com/cealiu/rule-system-vue)
